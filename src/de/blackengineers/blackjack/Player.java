@@ -39,7 +39,7 @@ public class Player extends Participant {
 
 		boolean stopTakingCards = false;
 		String eingabe = "";
-		Scanner sc = new Scanner(System.in);
+		//Scanner sc = new Scanner(System.in);
 
 		// zieht zwei Karten
 		this.addCardToHand(deck.getCard());
@@ -52,14 +52,14 @@ public class Player extends Participant {
 			// Wenn noch nicht verloren
 			if (this.getHandValue() < 21) {
 				System.out.println("Möchtest du aufhören (j/n)?");
-				eingabe = sc.next();
-
+				//eingabe = sc.next();
+				eingabe = Play.ourScanner.next();
 				stopTakingCards = ("j".equals(eingabe)) ? true : false;
 			}
 		
 		} while (!stopTakingCards && this.getHandValue() < 21);
 		
-		sc.close();
+		//sc.close();
 
 	}
 

@@ -8,10 +8,13 @@ public class Play {
 	private Dealer theDealer;
 	private Deck myDeck;
 	
+	static public Scanner ourScanner = new Scanner(System.in);
+	
 	// privater Kontruktor
 	private Play() {
 		this.thePlayer = new Player();
 		this.theDealer = new Dealer();
+		
 	}
 	
 	public static void main(String[] args) {
@@ -22,6 +25,7 @@ public class Play {
 	
 	
 	private void play() {
+		String eingabe;
 		// Schleife 1 Spiel spielen, bis "leave"
 		boolean wantsToPlay = true;
 		do {
@@ -59,14 +63,14 @@ public class Play {
 
 			// Abfrage weiter spielen?
 			System.out.println("Möchtest Du ein neues Spiel spielen? (j/n) ");
-			Scanner sc = new Scanner(System.in);
-			String eingabe = sc.nextLine();
-			sc.close();
+			eingabe = ourScanner.next();
 			wantsToPlay=eingabe.equalsIgnoreCase("j");
 		}
-		while (!wantsToPlay);
+		while (wantsToPlay);
 			
 		System.out.println("Es war mir eine große Freude! Auf Wiedersehen!");
+		
+		ourScanner.close();
 
 
 	}
