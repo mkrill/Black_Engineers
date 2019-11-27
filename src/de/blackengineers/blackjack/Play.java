@@ -34,15 +34,19 @@ public class Play {
 			thePlayer.clearHand();
 			theDealer.clearHand();
 			
-			// Spieler spielt
-			thePlayer.playRound(myDeck);
+			// Spieler erhalten die ersten beiden Karten
+			thePlayer.takeFirstTwoCards(myDeck);
+			theDealer.takeFirstTwoCards(myDeck);
+			
+			thePlayer.finalizeRound(myDeck);
+			
 			int resultPlayer = thePlayer.getHandValue();
 			// int resultPlayer = thePlayer.playRound(myDeck); //Alternative Participant.playRound() liefert direkt den Kartenwert zurück
 
 			// nur wenn Spieler <= 21 hat, spielt der Dealer
 
 			if (resultPlayer <= 21) {
-				theDealer.playRound(myDeck);
+				theDealer.finalizeRound(myDeck);
 				int resultDealer = theDealer.getHandValue();
 				//int resultDealer = theDealer.playRound(myDeck); //Alternative, siehe oben
 				
@@ -66,6 +70,9 @@ public class Play {
 			System.out.println("Möchtest Du ein neues Spiel spielen? (j/n) ");
 			eingabe = ourScanner.next();
 			wantsToPlay=eingabe.equalsIgnoreCase("j");
+			if (wantsToPlay) {
+				System.out.println("\n\n\n");
+			}
 		}
 		while (wantsToPlay);
 			

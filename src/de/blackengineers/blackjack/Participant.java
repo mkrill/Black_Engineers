@@ -25,9 +25,7 @@ public abstract class Participant {
 	public abstract int getHandValue();
 		// Bewertet den aktuellen Wert des Blattes
 
-	public abstract void playRound(Deck deck);
 	// Feststellung, ob Participant noch im Spiel
-
 	public boolean isStillInGame() {
 
 		if (this.getHandValue() <= 21) {
@@ -54,5 +52,9 @@ public abstract class Participant {
 	public void clearHand() {
 		this.getHand().clear();
 	}
+
+	public abstract void finalizeRound(Deck deck);
+	
+	public abstract void takeFirstTwoCards(Deck deck);
 
 }
