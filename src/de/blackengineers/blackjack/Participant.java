@@ -50,5 +50,9 @@ public abstract class Participant {
 		System.out.println("Wert des Blatts: " + this.getHandValue());
 		System.out.println();
 	}
+	
+	public void clearHand() {
+		this.getHand().clear();
+	}
 
 }
