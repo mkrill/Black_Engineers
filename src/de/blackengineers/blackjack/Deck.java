@@ -23,7 +23,7 @@ public class Deck {
 		Card diamondsB  = new Card("Diamonds", String.valueOf('B'),  10);
 		Card diamondsD  = new Card("Diamonds", String.valueOf('D'),  10);
 		Card diamondsK  = new Card("Diamonds", String.valueOf('K'),  10);
-		Card diamondsA  = new Card("Diamonds", "Ace"),  11);
+		Card diamondsA  = new Card("Diamonds", "Ace",  11);
 		newCards.add(diamonds2);
 		newCards.add(diamonds3);
 		newCards.add(diamonds4);
@@ -50,7 +50,7 @@ public class Deck {
 		Card heartsB  = new Card("Hearts", String.valueOf('B'),  10);
 		Card heartsD  = new Card("Hearts", String.valueOf('D'),  10);
 		Card heartsK  = new Card("Hearts", String.valueOf('K'),  10);
-		Card heartsA  = new Card("Hearts", "Ace"),  11);
+		Card heartsA  = new Card("Hearts", "Ace",  11);
 		newCards.add(hearts2);
 		newCards.add(hearts3);
 		newCards.add(hearts4);
@@ -77,7 +77,7 @@ public class Deck {
 		Card spadesB  = new Card("Spades", String.valueOf('B'),  10);
 		Card spadesD  = new Card("Spades", String.valueOf('D'),  10);
 		Card spadesK  = new Card("Spades", String.valueOf('K'),  10);
-		Card spadesA  = new Card("Spades", "Ace"),  11);
+		Card spadesA  = new Card("Spades", "Ace",  11);
 		newCards.add(spades2);
 		newCards.add(spades3);
 		newCards.add(spades4);
@@ -104,7 +104,7 @@ public class Deck {
 		Card clubsB  = new Card("Clubs", String.valueOf('B'),  10);
 		Card clubsD  = new Card("Clubs", String.valueOf('D'),  10);
 		Card clubsK  = new Card("Clubs", String.valueOf('K'),  10);
-		Card clubsA  = new Card("Clubs", "Ace"),  11);
+		Card clubsA  = new Card("Clubs", "Ace",  11);
 		newCards.add(clubs2);
 		newCards.add(clubs3);
 		newCards.add(clubs4);
