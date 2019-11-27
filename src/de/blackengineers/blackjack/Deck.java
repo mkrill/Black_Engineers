@@ -118,16 +118,17 @@ public class Deck {
 		newCards.add(clubsK);
 		newCards.add(clubsA);
 
-		for (Card card : newCards) {
-			System.out.println(card.toString());
-		}
-		
+		/*
+		 * for (Card card : newCards) { System.out.printf("%3s %8s \n", card.getName(),
+		 * card.getColor()); }
+		 */		
+		Collections.shuffle(newCards);
 		Collections.shuffle(newCards);
 
-		for (Card card : newCards) {
-			System.out.println(card.toString());
-		}
-		
+		/*
+		 * for (Card card : newCards) { System.out.printf("%3s %8s \n", card.getName(),
+		 * card.getColor()); }
+		 */		
 		
 	}
 	
