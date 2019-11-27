@@ -34,14 +34,21 @@ public class Dealer extends Participant {
 	}
 
 	@Override
-	public void playRound(Deck deck) {
+	public void takeFirstTwoCards (Deck deck) {
 
 		// zieht erste Karte
 		this.addCardToHand(deck.getCard());
+		
+		System.out.println("Die erste Karte des Dealers:");
 		this.showCards();
 
 		// zieht zweite Karte
 		this.addCardToHand(deck.getCard());
+
+	}
+
+	@Override
+	public void finalizeRound(Deck deck) {
 
 		while (this.getHandValue() < 17) {
 			this.addCardToHand(deck.getCard());

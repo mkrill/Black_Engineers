@@ -1,7 +1,6 @@
 package de.blackengineers.blackjack;
 
 import java.util.Iterator;
-import java.util.Scanner;
 
 public class Player extends Participant {
 
@@ -25,9 +24,9 @@ public class Player extends Participant {
 		while (it.hasNext()) {
 			currentCard = it.next();
 			if ("Ace".equals(currentCard.getName()) && handValue + 11 <= 21) {
-				handValue += 1;
-			} else if ("Ace".equals(currentCard.getName())) {
 				handValue += 11;
+			} else if ("Ace".equals(currentCard.getName())) {
+				handValue += 1;
 			}
 		}
 		return handValue;
@@ -35,32 +34,48 @@ public class Player extends Participant {
 	}
 
 	@Override
-	public void playRound(Deck deck) {
+	public void finalizeRound(Deck deck) {
 
-		boolean stopTakingCards = false;
+		boolean anotherCardWanted = false;
 		String eingabe = "";
 
-		// zieht zwei Karten
-		this.addCardToHand(deck.getCard());
+		if (this.getHandValue() < 21) {
+			System.out.println("Möchtest du noch eine Karte (j/n)?");
+			eingabe = Play.ourScanner.next();
+			anotherCardWanted = ("j".equals(eingabe)) ? true : false;
+		}
 
-		do {
+		while (anotherCardWanted && this.getHandValue() < 21) {
 			
 			this.addCardToHand(deck.getCard());
 			this.showCards();
 
 			// Wenn noch nicht verloren
 			if (this.getHandValue() < 21) {
-				System.out.println("Möchtest du aufhören (j/n)?");
+				System.out.println("Möchtest du noch eine Karte (j/n)?");
 				eingabe = Play.ourScanner.next();
-				stopTakingCards = ("j".equals(eingabe)) ? true : false;
+				anotherCardWanted = ("j".equals(eingabe)) ? true : false;
 			}
 		
-		} while (!stopTakingCards && this.getHandValue() < 21);
+		};
 		
 		System.out.println("Dein abschließendes Blatt:");
 		this.showCards();
 
 
+	}
+
+	@Override
+	public void takeFirstTwoCards(Deck deck) {
+
+		// zieht zwei Karten
+		this.addCardToHand(deck.getCard());
+		this.addCardToHand(deck.getCard());
+		
+		System.out.println("Deine ersten beiden Karten: ");
+		
+		this.showCards();
+		
 	}
 
 }
