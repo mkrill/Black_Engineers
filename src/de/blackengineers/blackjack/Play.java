@@ -32,7 +32,8 @@ public class Play {
 
 			// initialisiere Kartenspiel
 			myDeck = new Deck();
-		
+			thePlayer.clearHand();
+			theDealer.clearHand();
 			
 			// Spieler spielt
 			thePlayer.playRound(myDeck);
@@ -40,6 +41,7 @@ public class Play {
 			// int resultPlayer = thePlayer.playRound(myDeck); //Alternative Participant.playRound() liefert direkt den Kartenwert zurück
 
 			// nur wenn Spieler <= 21 hat, spielt der Dealer
+
 			if (resultPlayer <= 21) {
 				theDealer.playRound(myDeck);
 				int resultDealer = theDealer.getHandValue();

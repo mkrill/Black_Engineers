@@ -46,6 +46,9 @@ public class Dealer extends Participant {
 		while (this.getHandValue() < 17) {
 			this.addCardToHand(deck.getCard());
 		}
+		
+		System.out.println("Abschließendes Blatt des Dealers:");
+		this.showCards();
 
 	}
 
