@@ -1,6 +1,6 @@
 package de.blackengineers.blackjack;
 
-public abstract class Card {
+public class Card {
 
 	// attributes
 	private String color;
