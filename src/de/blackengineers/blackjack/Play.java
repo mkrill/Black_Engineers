@@ -19,7 +19,6 @@ public class Play {
 	
 	public static void main(String[] args) {
 		new Play().play();
-		//main(args);
 	}
 
 	
