@@ -1,16 +1,65 @@
 package de.blackengineers.blackjack;
 
+import java.util.Iterator;
+import java.util.Scanner;
+
 public class Player extends Participant {
 
 	@Override
 	public int getHandValue() {
-		// TODO Auto-generated method stub
-		return 0;
+
+		Card currentCard;
+		int handValue = 0;
+
+		// Zaehle die Werte der Nicht-Asse
+		Iterator<Card> it = this.getHand().iterator();
+		while (it.hasNext()) {
+			currentCard = it.next();
+			if (!"Ace".equals(currentCard.getName())) {
+				handValue += currentCard.getValue();
+			}
+		}
+
+		// Bewerte die Werte der Asse
+		it = this.getHand().iterator();
+		while (it.hasNext()) {
+			currentCard = it.next();
+			if ("Ace".equals(currentCard.getName()) && handValue + 11 <= 21) {
+				handValue += 1;
+			} else if ("Ace".equals(currentCard.getName())) {
+				handValue += 11;
+			}
+		}
+		return handValue;
+
 	}
 
 	@Override
 	public void playRound(Deck deck) {
-		// TODO Auto-generated method stub
+
+		boolean stopTakingCards = false;
+		String eingabe = "";
+		Scanner sc = new Scanner(System.in);
+
+		// zieht zwei Karten
+		this.addCardToHand(deck.getCard());
+
+		do {
+			
+			this.addCardToHand(deck.getCard());
+			this.showCards();
+
+			// Wenn noch nicht verloren
+			if (this.getHandValue() < 21) {
+				System.out.println("Möchtest du aufhören (j/n)?");
+				eingabe = sc.next();
+
+				stopTakingCards = ("j".equals(eingabe)) ? true : false;
+			}
+		
+		} while (!stopTakingCards && this.getHandValue() < 21);
+		
+		sc.close();
 
 	}
 
