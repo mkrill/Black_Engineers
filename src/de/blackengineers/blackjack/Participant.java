@@ -30,7 +30,30 @@ public abstract class Participant {
 
 	// Bewertet den aktuellen Wert des Blattes unterschiedlich implementiert für
 	// Spieler und Dealer
-	public abstract int getHandValue();
+	public int getHandValue() {
+
+		Card currentCard;
+		int handValue = 0, aceCount = 0;
+
+		// Summiere die Werte der Karten auf und bewerte Asse mit 1
+		Iterator<Card> it = this.getHand().iterator();
+		while (it.hasNext()) {
+			currentCard = it.next();
+			if (!"Ace".equals(currentCard.getName())) {
+				handValue += currentCard.getValue();
+			} else {
+				aceCount++;
+				handValue++;
+			}
+		}
+
+		// Wenn mindestens ein Ass dabei ist und für eine 11er Bewertung noch Platz zu 21 ist, addiere 10
+		if (aceCount > 0 && 21 - handValue >= 10) {
+			handValue += 10;
+		}
+
+		return handValue;
+	}
 
 	// Ziehen der ersten beiden Karten unterschiedlich für Spieler und Dealer
 	public abstract void takeFirstTwoCards(Deck deck);
