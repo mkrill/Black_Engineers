@@ -19,49 +19,15 @@ public class Player extends Participant {
 			}
 		}
 
-		// Bewerte die Werte der Asse
-		it = this.getHand().iterator();
-		while (it.hasNext()) {
-			currentCard = it.next();
-			if ("Ace".equals(currentCard.getName()) && handValue + 11 <= 21) {
+		// Bewertet die Asse
+		for (Card cCard : this.getHand()) {
+			if ("Ace".equals(cCard.getName()) && handValue + 11 <= 21) {
 				handValue += 11;
-			} else if ("Ace".equals(currentCard.getName())) {
+			} else if ("Ace".equals(cCard.getName())) {
 				handValue += 1;
 			}
 		}
 		return handValue;
-
-	}
-
-	@Override
-	public void finalizeRound(Deck deck) {
-
-		boolean anotherCardWanted = false;
-		String eingabe = "";
-
-		if (this.getHandValue() < 21) {
-			System.out.println("Möchtest du noch eine Karte (j/n)?");
-			eingabe = Play.ourScanner.next();
-			anotherCardWanted = ("j".equals(eingabe)) ? true : false;
-		}
-
-		while (anotherCardWanted && this.getHandValue() < 21) {
-			
-			this.addCardToHand(deck.getCard());
-			this.showCards();
-
-			// Wenn noch nicht verloren
-			if (this.getHandValue() < 21) {
-				System.out.println("Möchtest du noch eine Karte (j/n)?");
-				eingabe = Play.ourScanner.next();
-				anotherCardWanted = ("j".equals(eingabe)) ? true : false;
-			}
-		
-		};
-		
-		System.out.println("Dein abschließendes Blatt:");
-		this.showCards();
-
 
 	}
 
@@ -71,11 +37,47 @@ public class Player extends Participant {
 		// zieht zwei Karten
 		this.addCardToHand(deck.getCard());
 		this.addCardToHand(deck.getCard());
-		
+
+		// Aufdecken der Spielerkarten
 		System.out.println("Deine ersten beiden Karten: ");
-		
 		this.showCards();
-		
+
+	}
+
+	@Override
+	public void finalizeRound(Deck deck) {
+
+		boolean anotherCardWanted = false;
+		String eingabe = "";
+
+		// Abfrage, ob eine Karte gezogen werden soll, sofern der Blattwert unter 21
+		// liegt
+		if (this.getHandValue() < 21) {
+			System.out.println("Möchtest du noch eine Karte (j/n)?");
+			eingabe = Play.ourScanner.next();
+			anotherCardWanted = ("j".equals(eingabe)) ? true : false;
+		}
+
+		// solange weitere Karte gewünscht ist und Blattwert unter 21 liegt
+		while (anotherCardWanted && this.getHandValue() < 21) {
+
+			// Ziehen einer weiteren Karte und Anzeige des Blattes
+			this.addCardToHand(deck.getCard());
+			this.showCards();
+
+			// Abfrage, ob eine Karte gezogen werden soll, sofern der Blattwert unter 21
+			// liegt
+			if (this.getHandValue() < 21) {
+				System.out.println("Möchtest du noch eine Karte (j/n)?");
+				eingabe = Play.ourScanner.next();
+				anotherCardWanted = ("j".equals(eingabe)) ? true : false;
+			}
+
+		}
+
+		System.out.println("Dein abschließendes Blatt:");
+		this.showCards();
+
 	}
 
 }
