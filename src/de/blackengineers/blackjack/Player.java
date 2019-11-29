@@ -1,69 +1,6 @@
 package de.blackengineers.blackjack;
 
-import java.util.Iterator;
-
 public class Player extends Participant {
-
-	@Override
-	public int getHandValue() {
-
-		Card currentCard;
-		int handValue = 0;
-
-		// Zaehle die Werte der Nicht-Asse
-		Iterator<Card> it = this.getHand().iterator();
-		while (it.hasNext()) {
-			currentCard = it.next();
-			if (!"Ace".equals(currentCard.getName())) {
-				handValue += currentCard.getValue();
-			}
-		}
-
-		// Bewerte die Werte der Asse
-		it = this.getHand().iterator();
-		while (it.hasNext()) {
-			currentCard = it.next();
-			if ("Ace".equals(currentCard.getName()) && handValue + 11 <= 21) {
-				handValue += 11;
-			} else if ("Ace".equals(currentCard.getName())) {
-				handValue += 1;
-			}
-		}
-		return handValue;
-
-	}
-
-	@Override
-	public void finalizeRound(Deck deck) {
-
-		boolean anotherCardWanted = false;
-		String eingabe = "";
-
-		if (this.getHandValue() < 21) {
-			System.out.println("Möchtest du noch eine Karte (j/n)?");
-			eingabe = Play.ourScanner.next();
-			anotherCardWanted = ("j".equals(eingabe)) ? true : false;
-		}
-
-		while (anotherCardWanted && this.getHandValue() < 21) {
-			
-			this.addCardToHand(deck.getCard());
-			this.showCards();
-
-			// Wenn noch nicht verloren
-			if (this.getHandValue() < 21) {
-				System.out.println("Möchtest du noch eine Karte (j/n)?");
-				eingabe = Play.ourScanner.next();
-				anotherCardWanted = ("j".equals(eingabe)) ? true : false;
-			}
-		
-		};
-		
-		System.out.println("Dein abschließendes Blatt:");
-		this.showCards();
-
-
-	}
 
 	@Override
 	public void takeFirstTwoCards(Deck deck) {
@@ -71,11 +8,53 @@ public class Player extends Participant {
 		// zieht zwei Karten
 		this.addCardToHand(deck.getCard());
 		this.addCardToHand(deck.getCard());
-		
+
+		// Aufdecken der Spielerkarten
 		System.out.println("Deine ersten beiden Karten: ");
-		
 		this.showCards();
-		
+
+	}
+
+	// Ask Player, if she ants another Card
+	private boolean playerWantsAnotherCard() {
+
+		String eingabe;
+
+		System.out.println("Möchtest du noch eine Karte (j/n)?");
+		eingabe = Play.ourScanner.next();
+
+		return ("j".equals(eingabe)) ? true : false;
+	}
+
+	@Override
+	public void finalizeRound(Deck deck) {
+
+		boolean anotherCardWanted = false;
+
+		// Abfrage, ob eine Karte gezogen werden soll, sofern der Blattwert unter 21
+		// liegt
+		if (this.getHandValue() < 21) {
+			anotherCardWanted = this.playerWantsAnotherCard();
+		}
+
+		// solange weitere Karte gewünscht ist und Blattwert unter 21 liegt
+		while (anotherCardWanted && this.getHandValue() < 21) {
+
+			// Ziehen einer weiteren Karte und Anzeige des Blattes
+			this.addCardToHand(deck.getCard());
+			this.showCards();
+
+			// Abfrage, ob eine Karte gezogen werden soll, sofern der Blattwert unter 21
+			// liegt
+			if (this.getHandValue() < 21) {
+				anotherCardWanted = this.playerWantsAnotherCard();
+			}
+
+		}
+
+		System.out.println("Dein abschließendes Blatt:");
+		this.showCards();
+
 	}
 
 }
