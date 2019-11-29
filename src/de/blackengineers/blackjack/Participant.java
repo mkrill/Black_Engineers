@@ -28,8 +28,7 @@ public abstract class Participant {
 		return hand;
 	}
 
-	// Bewertet den aktuellen Wert des Blattes unterschiedlich implementiert für
-	// Spieler und Dealer
+	// Bewertet den aktuellen Wert des Blattes
 	public int getHandValue() {
 
 		Card currentCard;
